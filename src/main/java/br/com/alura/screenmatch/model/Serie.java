@@ -1,17 +1,34 @@
 package br.com.alura.screenmatch.model;
 
 import br.com.alura.screenmatch.service.ConsultaGemini;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 
+@Entity
+@Table(name = "series")
 public class Serie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String titulo;
+
     private Integer totalTemporadas;
     private Double avaliacao;
+
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private String imagem;
     private String sinopse;
     private String atores;
+    @Transient
+    private List<Episodio> episodios = new ArrayList<>();
+
+    public Serie(){}
 
     public Serie (DadosSeries dadosSeries){
         this.titulo=dadosSeries.titulo();
@@ -21,6 +38,14 @@ public class Serie {
         this.atores= dadosSeries.atores();
         this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSeries.avaliacao())).orElse(0);
         this.categoria = Categoria.fromString(dadosSeries.categoria().split(",")[0].trim());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
