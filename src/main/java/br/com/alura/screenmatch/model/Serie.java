@@ -25,10 +25,19 @@ public class Serie {
     private String imagem;
     private String sinopse;
     private String atores;
-    @Transient
+
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        this.episodios = episodios;
+    }
 
     public Serie (DadosSeries dadosSeries){
         this.titulo=dadosSeries.titulo();
