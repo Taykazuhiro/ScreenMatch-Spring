@@ -21,6 +21,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 		Principal principal = new Principal(repositorio);
 		principal.exibeMenu();
+		//finalizando
 
 	}
 }
