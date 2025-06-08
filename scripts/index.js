@@ -24,7 +24,7 @@ function criarListaFilmes(elemento, dados) {
     const listaHTML = dados.map((filme) => `
         <li>
             <a href="/detalhes.html?id=${filme.id}">
-                <img src="${filme.poster}" alt="${filme.titulo}">
+                <img src="${filme.imagem}" alt="${filme.titulo}">
             </a>
         </li>
     `).join('');
@@ -80,7 +80,7 @@ function geraSeries() {
         .then(data => {
             criarListaFilmes(elementos.top5, data[0]);
             criarListaFilmes(elementos.lancamentos, data[1]);
-            criarListaFilmes(elementos.series, data[2].slice(0, 5));
+            criarListaFilmes(elementos.series, data[2].slice(0, 10));
         })
         .catch(error => {
             lidarComErro("Ocorreu um erro ao carregar os dados.");

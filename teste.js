@@ -22,7 +22,7 @@ function criarListaFilmes(elemento, dados) {
     const listaHTML = dados.slice(0, 5).map((filme) => `
         <li>
             <a href="/detalhes.html?id=${filme.id}">
-                <img src="${filme.poster}" alt="${filme.titulo}">
+                <img src="${filme.imagem}" alt="${filme.titulo}">
             </a>
         </li>
     `).join('');
