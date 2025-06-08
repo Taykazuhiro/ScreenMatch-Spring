@@ -229,8 +229,8 @@ public class Principal {
             System.out.println("Digite o ano limite de lançamento: ");
             var anoLancamento = leitura.nextInt();
             leitura.nextLine();
-            List<Episodio> episodiosAno = repositorio.episodiosPorSerieEAno(serieBuscadaExiste, anoLancamento);
-            episodiosAno.forEach(System.out::println);
+//            List<Episodio> episodiosAno = repositorio.episodiosPorSerieEAno(serieBuscadaExiste, anoLancamento);
+//            episodiosAno.forEach(System.out::println);
         }
     }
 }
