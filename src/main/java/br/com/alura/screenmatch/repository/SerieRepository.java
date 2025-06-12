@@ -22,16 +22,20 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     @Query("SELECT s FROM Serie s WHERE s.totalTemporadas <= :serieTemporada AND s.avaliacao >= :avaliacao")
     List<Serie> seriesPorTemporadaEAvaliacao(int serieTemporada, double avaliacao);
 
-    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:trechoEpisodio%")
-    List<Episodio> episodioPorTrecho(String trechoEpisodio);
-
     @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serieBuscadaExiste ORDER BY e.avaliacao DESC LIMIT 5")
     List<Episodio> top5EpisodiosSerieBuscada(Serie serieBuscadaExiste);
 
-//    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serieBuscadaExiste AND YEAR(e.dataLancamento) >= :anoLancamento")
-//    List<Episodio> episodiosPorSerieEAno(Serie serieBuscadaExiste, int anoLancamento);
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:trechoEpisodio%")
+    List<Episodio> episodioPorTrecho(String trechoEpisodio);
 
-    List<Serie> findTop5ByOrderByEpisodiosDataLancamentoDesc();
+    @Query("SELECT s FROM Serie s " +
+            "JOIN s.episodios e " +
+            "GROUP BY s " +
+            "ORDER BY MAX(e.dataLancamento) DESC LIMIT 5")
+   List<Serie> lancamentosMaisRecentes();
+
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id AND e.temporada = :numero")
+    List<Episodio> obterEpisodioPorNumero(Long id, Long numero);
 }
 
 
