@@ -47,4 +47,9 @@ private ServiceSerie servico;
         return servico.obterEpisodioPorTemporada(id, numero);
     }
 
+    @GetMapping("/categoria/{nomeGenero}")
+    public List<SerieDTO> obterSeriesPorCategoria(@PathVariable String nomeGenero){
+        return servico.obterSeriesPorCategoria(nomeGenero);
+    }
+
 }
